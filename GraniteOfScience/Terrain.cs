@@ -12,6 +12,7 @@ namespace GraniteOfScience
         private int[,] map;
         // текстура земли
         private Image groundImage;
+        private Image wallImage;
 
         // размеры карты в тайлах
         public int Width => map.GetLength(1);
@@ -24,6 +25,7 @@ namespace GraniteOfScience
         {
             // загружаем изображение земли
             groundImage = Image.FromFile("Images/Terrain.png");
+            wallImage = Image.FromFile("Images/desk.png");
 
             // разбиваем текстовую карту на строки
             var lines = mapText
@@ -50,9 +52,11 @@ namespace GraniteOfScience
                     char c = lines[y][x];
 
                     if (c == 'T')
-                        map[y, x] = 1;
+                        map[y, x] = 1;          // земля
+                    else if (c == 'D')
+                        map[y, x] = 2;          // неломаемый блок
                     else
-                        map[y, x] = 0;
+                        map[y, x] = 0;          // пустота
 
                     if (c == 'P')
                     {
@@ -65,12 +69,21 @@ namespace GraniteOfScience
         // метод копания — превращает землю в пустоту
         public void Dig(int x, int y)
         {
-            if (IsInside(x, y))
+            if (!IsInside(x, y)) return;
+
+            // ломается только земля, но не стены
+            if (map[y, x] == 1)
                 map[y, x] = 0;
         }
         public bool IsInside(int x, int y)
         {
             return x >= 0 && x < Width && y >= 0 && y < Height;
+        }
+
+        public bool IsWalkable(int x, int y)
+        {
+            if (!IsInside(x, y)) return false;
+            return map[y, x] != 2; // нельзя ходить по стенам
         }
 
         // отрисовка карты
@@ -80,15 +93,13 @@ namespace GraniteOfScience
             {
                 for (int x = 0; x < Width; x++)
                 {
-                    if (map[y, x] == 1) // если это земля
+                    if (map[y, x] == 1)
                     {
-                        g.DrawImage(
-                            groundImage,
-                            x * TileSize,
-                            y * TileSize,
-                            TileSize,
-                            TileSize
-                        );
+                        g.DrawImage(groundImage, x * TileSize, y * TileSize, TileSize, TileSize);
+                    }
+                    else if (map[y, x] == 2)
+                    {
+                        g.DrawImage(wallImage, x * TileSize, y * TileSize, TileSize, TileSize);
                     }
                 }
             }

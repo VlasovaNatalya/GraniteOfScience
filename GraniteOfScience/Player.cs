@@ -51,7 +51,7 @@ namespace GraniteOfScience
                 case Keys.Down: targetY++; break;
             }
 
-            if (terrain.IsInside(targetX, targetY))
+            if (terrain.IsWalkable(targetX, targetY))
             {
                 TileX = targetX;
                 TileY = targetY;
