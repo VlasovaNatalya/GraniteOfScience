@@ -7,6 +7,7 @@ namespace GraniteOfScience
     public partial class Form1 : Form
     {
         private Game game;       // объект будет управлять игроком, врагами..
+        public static Game CurrentGame { get; private set; }
         private Timer gameTimer;
 
         public Form1()
@@ -34,6 +35,7 @@ namespace GraniteOfScience
 
             // создаём игру по карте
             game = new Game();
+            CurrentGame = game;
 
             // настройка таймера
             gameTimer = new Timer();

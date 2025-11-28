@@ -5,6 +5,7 @@ namespace GraniteOfScience
     public class Level
     {
         public Terrain Terrain { get; private set; }
+        public Point TeacherStartPosition { get; private set; }
 
         // карта уровня только здесь
         private const string map = @"
@@ -22,7 +23,7 @@ T TTTTTTTT         DTTTTD         TTTTTTT
 TTTTTTTTTT TTTTTTTTT  TTT TTTTT   TTTTT
 T           DTTTTTTTT TTT TTTTTTTTTTTTT
 TTT  TTTTTTTTTTTTTTTTTTT TT TTTTT TTTTT
-TTTT TTTTTTTTTTTTTTTTTTT   DTTT   TTTTTT
+TTTT TTTTTTTTTTTTTTTTTTTR  DTTT   TTTTTT
 TT D  T TTT TTTTTTTTTTTTTTTTTTTTTTTTTTT
 TTTT T TTT     TTT TTTT D TTTTTTTTTTTTT
 ";

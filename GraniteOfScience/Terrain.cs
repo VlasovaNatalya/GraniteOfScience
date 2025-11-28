@@ -21,6 +21,9 @@ namespace GraniteOfScience
         public int PlayerStartX { get; private set; }
         public int PlayerStartY { get; private set; }
 
+        public int TeacherStartX { get; private set; } 
+        public int TeacherStartY { get; private set; }
+
         public Terrain(string mapText)
         {
             // загружаем изображение земли
@@ -62,6 +65,11 @@ namespace GraniteOfScience
                     {
                         PlayerStartX = x;
                         PlayerStartY = y;
+                    }
+                    else if (c == 'R')
+                    {
+                        TeacherStartX = x;
+                        TeacherStartY = y;
                     }
                 }
         }
