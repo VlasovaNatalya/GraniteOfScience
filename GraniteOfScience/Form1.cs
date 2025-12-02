@@ -8,6 +8,7 @@ namespace GraniteOfScience
     {
         private Game game;       // объект будет управлять игроком, врагами..
         private Timer gameTimer;
+        private Image background;
 
         public Form1()
         {
@@ -47,12 +48,29 @@ namespace GraniteOfScience
 
             // подписываемся на событие "нажатие клавиши"
             this.KeyDown += (s, e) => game.OnKeyDown(e.KeyCode);
+            background = Image.FromFile("Images/Background.png");
         }
 
         // вызывается каждый раз, когда нужно перерисовать окно
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);    // базовая отрисовка
+
+            using (var attrs = new System.Drawing.Imaging.ImageAttributes())
+            {
+                var colorMatrix = new System.Drawing.Imaging.ColorMatrix();
+                colorMatrix.Matrix33 = 0.5f; // прозрачность 60%
+                attrs.SetColorMatrix(colorMatrix);
+
+                e.Graphics.DrawImage(
+                    background,
+                    new Rectangle(0, 0, ClientSize.Width, ClientSize.Height),
+                    0, 0, background.Width, background.Height,
+                    GraphicsUnit.Pixel,
+                    attrs
+                );
+            }
+
             game?.Draw(e.Graphics); // рисуем всё, что есть в игре
         }
     }

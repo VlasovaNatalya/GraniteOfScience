@@ -81,6 +81,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\Background.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Card.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
