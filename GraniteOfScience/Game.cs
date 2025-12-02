@@ -6,23 +6,23 @@ namespace GraniteOfScience
     public class Game
     {
         private Player player;   // игрок
-        private Level level;
+        public Terrain Terrain { get; } // карта (доступна наружу при необходимости)
 
-        public Game()
+        public Game(Terrain terrain)
         {
-            level = new Level();
+            Terrain = terrain;
 
             // создаём игрока по координатам из Terrain
-            player = new Player(level.Terrain.PlayerStartX, level.Terrain.PlayerStartY);
-            level.Terrain.Dig(player.TileX, player.TileY);
-        }
+            player = new Player(Terrain.PlayerStartX, Terrain.PlayerStartY);
 
-        public Terrain Terrain => level.Terrain;
+            // копаем стартовую клетку
+            Terrain.Dig(player.TileX, player.TileY);
+        }
 
         // обработка нажатий клавиш
         public void OnKeyDown(Keys key)
         {
-            player.Move(key, level.Terrain);
+            player.Move(key, Terrain);
         }
 
         // Обновление состояния игры
@@ -35,7 +35,7 @@ namespace GraniteOfScience
         // отрисовка всех элементов игры
         public void Draw(Graphics g)
         {
-            level.Terrain.Draw(g);
+            Terrain.Draw(g);
             player.Draw(g);
         }
     }

@@ -20,10 +20,11 @@ namespace GraniteOfScience
             this.Text = "Digger (WinForms)";
             this.KeyPreview = true;       // перехватывает клавиши до других контролов
 
-            // создаём временную игру чтобы узнать размеры уровня
-            var tempGame = new Game();
-            var terrain = tempGame.Terrain;
+            // загружаем уровень
+            var level = new Level();
+            var terrain = level.Terrain;
 
+            // окно подстраивается под карту
             this.ClientSize = new Size(
                 terrain.Width * 32,
                 terrain.Height * 32
@@ -34,7 +35,10 @@ namespace GraniteOfScience
             this.MaximizeBox = false;
 
             // создаём игру по карте
-            game = new Game();
+            game = new Game(terrain);
+
+            // загружаем фон
+            background = Image.FromFile("Images/Background.png");
 
             // настройка таймера
             gameTimer = new Timer();
@@ -48,7 +52,6 @@ namespace GraniteOfScience
 
             // подписываемся на событие "нажатие клавиши"
             this.KeyDown += (s, e) => game.OnKeyDown(e.KeyCode);
-            background = Image.FromFile("Images/Background.png");
         }
 
         // вызывается каждый раз, когда нужно перерисовать окно
@@ -56,10 +59,11 @@ namespace GraniteOfScience
         {
             base.OnPaint(e);    // базовая отрисовка
 
+            // фон (полупрозрачный)
             using (var attrs = new System.Drawing.Imaging.ImageAttributes())
             {
                 var colorMatrix = new System.Drawing.Imaging.ColorMatrix();
-                colorMatrix.Matrix33 = 0.5f; // прозрачность 60%
+                colorMatrix.Matrix33 = 0.5f; // прозрачность 50%
                 attrs.SetColorMatrix(colorMatrix);
 
                 e.Graphics.DrawImage(
