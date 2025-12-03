@@ -80,6 +80,10 @@ namespace GraniteOfScience
                     btn.Text = "P";
                     btn.BackColor = Color.Yellow;
                     break;
+                case "Преподаватель":
+                    btn.Text = "R";
+                    btn.BackColor = Color.Red;
+                    break;
             }
         }
 
@@ -98,7 +102,7 @@ namespace GraniteOfScience
                     else
                         line += t[0];
                 }
-                result += line + "\n";
+                result += line.TrimEnd() + "\n";
             }
 
             File.WriteAllText("level1.txt", result);

@@ -9,30 +9,30 @@ namespace GraniteOfScience
         private Player player;   // игрок
         private Teacher teacher;
         private Level level;
-        public Terrain Terrain { get; } // карта (доступна наружу при необходимости)
+
         private bool isGameOver = false;
 
-        public Game(Terrain terrain)
+        public Terrain Terrain => level.Terrain;   // доступ к карте
+
+        public Game()
         {
-            Terrain = terrain;
             level = new Level();
 
             // создаём игрока по координатам из Terrain
-            player = new Player(level.Terrain.PlayerStartX, level.Terrain.PlayerStartY);
-            //player = new Player(Terrain.PlayerStartX, Terrain.PlayerStartY);
-            teacher = new Teacher(level.Terrain.TeacherStartX, level.Terrain.TeacherStartY, player);
-            level.Terrain.Dig(player.TileX, player.TileY);
-            //Terrain.Dig(player.TileX, player.TileY);
-        }
+            player = new Player(Terrain.PlayerStartX, Terrain.PlayerStartY);
 
-        public Terrain Terrain => level.Terrain;
+            // создаём преподавателя
+            teacher = new Teacher(Terrain.TeacherStartX, Terrain.TeacherStartY, player);
+
+            // копаем стартовую клетку
+            Terrain.Dig(player.TileX, player.TileY);
+        }
 
         // обработка нажатий клавиш
         public void OnKeyDown(Keys key)
         {
             if (!isGameOver)
-                player.Move(key, level.Terrain);
-            //player.Move(key, level.Terrain);
+                player.Move(key, Terrain);
         }
 
         // Обновление состояния игры
@@ -40,8 +40,7 @@ namespace GraniteOfScience
         {
 
             if (isGameOver) return;
-
-            // потом появится логика 
+ 
             player.Update();
 
             //преподаватель движется к игроку 
@@ -75,7 +74,7 @@ namespace GraniteOfScience
 
             if (result == DialogResult.Yes)
             {
-                Application.Restart();
+                Application.Restart();  
             }
             else
             {

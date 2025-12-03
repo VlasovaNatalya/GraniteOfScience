@@ -47,7 +47,8 @@
             "Пусто",
             "Земля",
             "Стена",
-            "Игрок"});
+            "Игрок",
+            "Преподаватель"});
             this.comboCellType.Location = new System.Drawing.Point(12, 12);
             this.comboCellType.Name = "comboCellType";
             this.comboCellType.Size = new System.Drawing.Size(121, 24);
