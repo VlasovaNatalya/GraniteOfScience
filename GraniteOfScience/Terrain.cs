@@ -93,6 +93,11 @@ namespace GraniteOfScience
             if (!IsInside(x, y)) return false;
             return map[y, x] != 2; // нельзя ходить по стенам
         }
+        public bool IsEmpty(int x, int y)
+        {
+            if (!IsInside(x, y)) return false;
+            return map[y, x] == 0; // Только полностью пустые клетки
+        }
 
         // отрисовка карты
         public void Draw(Graphics g)

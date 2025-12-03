@@ -94,8 +94,8 @@ namespace GraniteOfScience
 
         private bool CanMoveTo(int x, int y, Terrain terrain)
         {
-            // Проверяем, что координаты внутри карты и клетка проходима
-            return terrain != null && terrain.IsInside(x, y) && terrain.IsWalkable(x, y);
+            // Проверяем, что координаты внутри карты и клетка пустая
+            return terrain != null && terrain.IsInside(x, y) && terrain.IsEmpty(x, y);
         }
 
         public void Update()
