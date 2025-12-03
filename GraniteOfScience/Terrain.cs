@@ -21,6 +21,9 @@ namespace GraniteOfScience
         public int PlayerStartX { get; private set; }
         public int PlayerStartY { get; private set; }
 
+        public int TeacherStartX { get; private set; } 
+        public int TeacherStartY { get; private set; }
+
         public Terrain(string mapText)
         {
             // загружаем изображение земли
@@ -63,6 +66,11 @@ namespace GraniteOfScience
                         PlayerStartX = x;
                         PlayerStartY = y;
                     }
+                    else if (c == 'R')
+                    {
+                        TeacherStartX = x;
+                        TeacherStartY = y;
+                    }
                 }
         }
 
@@ -84,6 +92,11 @@ namespace GraniteOfScience
         {
             if (!IsInside(x, y)) return false;
             return map[y, x] != 2; // нельзя ходить по стенам
+        }
+        public bool IsEmpty(int x, int y)
+        {
+            if (!IsInside(x, y)) return false;
+            return map[y, x] == 0; // Только полностью пустые клетки
         }
 
         // отрисовка карты

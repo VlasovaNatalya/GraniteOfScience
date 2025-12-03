@@ -7,6 +7,7 @@ namespace GraniteOfScience
     public partial class Form1 : Form
     {
         private Game game;       // объект будет управлять игроком, врагами..
+        public static Game CurrentGame { get; private set; }
         private Timer gameTimer;
         private Image background;
 
@@ -35,7 +36,8 @@ namespace GraniteOfScience
             this.MaximizeBox = false;
 
             // создаём игру по карте
-            game = new Game(terrain);
+            game = new Game();
+            CurrentGame = game;
 
             // загружаем фон
             background = Image.FromFile("Images/Background.png");
