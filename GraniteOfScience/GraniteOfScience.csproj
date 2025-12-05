@@ -53,7 +53,14 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Game.cs" />
+    <Compile Include="GameSettings.cs" />
     <Compile Include="Level.cs" />
+    <Compile Include="MainMenuForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainMenuForm.Designer.cs">
+      <DependentUpon>MainMenuForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MapEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,12 +68,21 @@
       <DependentUpon>MapEditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Player.cs" />
-	<Compile Include="Teacher.cs" />
+    <Compile Include="SpeedSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SpeedSettingsForm.Designer.cs">
+      <DependentUpon>SpeedSettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Teacher.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Terrain.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainMenuForm.resx">
+      <DependentUpon>MainMenuForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MapEditorForm.resx">
       <DependentUpon>MapEditorForm.cs</DependentUpon>
@@ -80,6 +96,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SpeedSettingsForm.resx">
+      <DependentUpon>SpeedSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
