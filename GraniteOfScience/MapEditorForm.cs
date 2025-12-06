@@ -23,6 +23,30 @@ namespace GraniteOfScience
             CreateGrid();
         }
 
+        // Проверяет, есть ли уже символ на карте
+        private bool ContainsSymbol(char symbol)
+        {
+            foreach (var cell in grid)
+                if (cell.Text == symbol.ToString())
+                    return true;
+
+            return false;
+        }
+
+        // Удаляет остальные такие же символы, кроме выбранного
+        private void RemoveOther(char symbol, Button except)
+        {
+            foreach (var cell in grid)
+            {
+                if (cell != except && cell.Text == symbol.ToString())
+                {
+                    cell.Text = " ";
+                    cell.BackColor = Color.White;
+                }
+            }
+        }
+
+
         private void CreateGrid()
         {
             grid = new Button[GridHeight, GridWidth];
@@ -77,12 +101,25 @@ namespace GraniteOfScience
                     break;
 
                 case "Игрок":
+                    if (ContainsSymbol('P'))
+                    {
+                        MessageBox.Show("На карте уже есть игрок!");
+                        return;
+                    }
                     btn.Text = "P";
                     btn.BackColor = Color.Yellow;
+                    RemoveOther('P', btn);
                     break;
+
                 case "Преподаватель":
+                    if (ContainsSymbol('R'))
+                    {
+                        MessageBox.Show("На карте уже есть преподаватель!");
+                        return;
+                    }
                     btn.Text = "R";
                     btn.BackColor = Color.Red;
+                    RemoveOther('R', btn);
                     break;
             }
         }

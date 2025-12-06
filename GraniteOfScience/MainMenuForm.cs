@@ -7,6 +7,7 @@ namespace GraniteOfScience
     {
         public MainMenuForm()
         {
+            this.AutoScaleMode = AutoScaleMode.None;
             InitializeComponent();
         }
 
@@ -31,6 +32,11 @@ namespace GraniteOfScience
         private void buttonExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void MainMenuForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

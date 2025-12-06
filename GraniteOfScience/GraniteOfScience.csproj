@@ -95,6 +95,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="SpeedSettingsForm.resx">
       <DependentUpon>SpeedSettingsForm.cs</DependentUpon>
@@ -143,6 +144,11 @@
     <Content Include="Images\Terrain.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\Quit.png" />
+    <None Include="Resources\Speed.png" />
+    <None Include="Resources\Map.png" />
+    <None Include="Resources\Play.png" />
+    <None Include="Resources\Fon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
