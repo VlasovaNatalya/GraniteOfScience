@@ -12,6 +12,7 @@ namespace GraniteOfScience
         private const int GridHeight = 20; // высота карты в тайлах
 
         private Button[,] grid;
+        private int currentLevel = 1;//текущий уровень 
 
         public MapEditorForm()
         {
@@ -84,6 +85,26 @@ namespace GraniteOfScience
                     btn.Text = "R";
                     btn.BackColor = Color.Red;
                     break;
+                case "Энергетик":
+                    btn.Text = "E";
+                    btn.BackColor = Color.Green;
+                    break;
+                case "Ноутбук":
+                    btn.Text = "L";
+                    btn.BackColor = Color.Green;
+                    break;
+                case "Тетрадь":
+                    btn.Text = "N";
+                    btn.BackColor = Color.Green;
+                    break;
+                case "Карта":
+                    btn.Text = "C";
+                    btn.BackColor = Color.Green;
+                    break;
+                case "Ответы":
+                    btn.Text = "X";
+                    btn.BackColor = Color.Green;
+                    break;
             }
         }
 
@@ -104,12 +125,37 @@ namespace GraniteOfScience
                 }
                 result += line.TrimEnd() + "\n";
             }
+            string selectedLevel = levelNumber.Text;
 
-            File.WriteAllText("level1.txt", result);
-            MessageBox.Show("Карта сохранена в level1.txt");
+            if (selectedLevel == "Уровень 1")
+            {
+                File.WriteAllText("level1.txt", result);
+                MessageBox.Show("Карта сохранена в level1.txt");
+            }
+            else if (selectedLevel == "Уровень 2")
+            {
+                File.WriteAllText("level2.txt", result);
+                MessageBox.Show("Карта сохранена в level2.txt");
+            }
+            // Если уровень не выбран
+            else
+            {
+                File.WriteAllText("level1.txt", result);
+                MessageBox.Show("Уровень не выбран. Карта сохранена в level1.txt");
+            }
         }
 
         private void buttonSave_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboCellType_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

@@ -6,11 +6,14 @@ namespace GraniteOfScience
     public class Level
     {
         public Terrain Terrain { get; private set; }
+        public int LevelNumber { get; private set; }
         public Point TeacherStartPosition { get; private set; }
 
-        public Level()
+        public Level(int levelNumber = 1)
         {
-            string mapText = File.ReadAllText("level1.txt");
+            int TeacherSpeedDelay = levelNumber == 1 ? 15 : 8;
+
+            string mapText = File.ReadAllText($"level{levelNumber}.txt");
             Terrain = new Terrain(mapText);
         }
     }
