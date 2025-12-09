@@ -8,6 +8,7 @@ namespace GraniteOfScience
     {
         public SpeedSettingsForm()
         {
+            this.AutoScaleMode = AutoScaleMode.None;
             InitializeComponent();
 
             numericUpDownSpeed.DecimalPlaces = 1;
@@ -21,6 +22,11 @@ namespace GraniteOfScience
             GameSettings.PlayerSpeed = (float)numericUpDownSpeed.Value;
             MessageBox.Show("Скорость сохранена!");
             this.Close();
+        }
+
+        private void numericUpDownSpeed_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

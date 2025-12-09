@@ -144,6 +144,7 @@
     <Content Include="Images\Terrain.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\Save.png" />
     <None Include="Resources\Quit.png" />
     <None Include="Resources\Speed.png" />
     <None Include="Resources\Map.png" />
