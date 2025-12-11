@@ -68,16 +68,13 @@
     <Compile Include="MapEditorForm.Designer.cs">
       <DependentUpon>MapEditorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Player.cs" />
-<<<<<<< HEAD
-=======
+	<Compile Include="Player.cs" />
     <Compile Include="SpeedSettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SpeedSettingsForm.Designer.cs">
       <DependentUpon>SpeedSettingsForm.cs</DependentUpon>
     </Compile>
->>>>>>> d9635a949fce3a99d8ec62286dcb8c5af53d1d2c
     <Compile Include="Teacher.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
