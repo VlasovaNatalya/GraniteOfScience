@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GraniteOfScience
@@ -24,12 +25,23 @@ namespace GraniteOfScience
         public int TeacherStartX { get; private set; } 
         public int TeacherStartY { get; private set; }
 
+        public List<ArtifactPosition> ArtifactPositions { get; private set; }
+
+        public class ArtifactPosition
+        {
+            public int X { get; set; }
+            public int Y { get; set; }
+            public char Type { get; set; } // 'E', 'L', 'N', 'C', 'X'
+        }
+
         public Terrain(string mapText)
         {
             // загружаем изображение земли
             groundImage = Image.FromFile("Images/Terrain.png");
             wallImage = Image.FromFile("Images/desk.png");
 
+            //инициализируем список артефактов
+            ArtifactPositions = new List<ArtifactPosition>();
             // разбиваем текстовую карту на строки
             var lines = mapText
                 .Trim()
@@ -54,22 +66,38 @@ namespace GraniteOfScience
 
                     char c = lines[y][x];
 
-                    if (c == 'T')
-                        map[y, x] = 1;          // земля
-                    else if (c == 'D')
-                        map[y, x] = 2;          // неломаемый блок
-                    else
-                        map[y, x] = 0;          // пустота
+                    switch (c)
+                    {
+                        case 'T':
+                            map[y, x] = 1; // земля
+                            break;
+                        case 'D':
+                            map[y, x] = 2; // неломаемый блок
+                            break;
+                        case 'P': // игрок
+                            PlayerStartX = x;
+                            PlayerStartY = y;
+                            break;
+                        case 'R': // учитель
+                            TeacherStartX = x;
+                            TeacherStartY = y;
+                            break;
+                        case 'E': // энергетик
+                        case 'L': // ноут
+                        case 'N': // тетрадь
+                        case 'C': // карта
+                        case 'X': // ответы
 
-                    if (c == 'P')
-                    {
-                        PlayerStartX = x;
-                        PlayerStartY = y;
-                    }
-                    else if (c == 'R')
-                    {
-                        TeacherStartX = x;
-                        TeacherStartY = y;
+                            ArtifactPositions.Add(new ArtifactPosition
+                            {
+                                X = x,
+                                Y = y,
+                                Type = c
+                            });
+                            break;
+                        default:
+                            map[y, x] = 0; // пустота
+                            break;
                     }
                 }
         }
