@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Drawing.Printing;
 using System.Windows.Forms;
 
 namespace GraniteOfScience
@@ -12,10 +13,9 @@ namespace GraniteOfScience
         private float realY;
 
         private const int TileSize = 32;
-        private const float Speed = 4f; // скорость в пикселях за кадр
+        private float Speed => GameSettings.PlayerSpeed;
         private Image sprite;
 
-        // загружает изображение и задаёт стартовую позицию
         public Player(int startX, int startY)
         {
             TileX = startX;
@@ -29,15 +29,12 @@ namespace GraniteOfScience
             }
             catch
             {
-                MessageBox.Show("Не найден файл: Images/Digger.png");
-                // создаём временную заглушку
                 sprite = new Bitmap(TileSize, TileSize);
                 using (Graphics g = Graphics.FromImage(sprite))
                     g.FillRectangle(Brushes.Red, 0, 0, TileSize, TileSize);
             }
         }
 
-        // Метод движения
         public void Move(Keys key, Terrain terrain)
         {
             int targetX = TileX;
@@ -58,14 +55,16 @@ namespace GraniteOfScience
                 terrain.Dig(TileX, TileY);
             }
         }
+
         public void Update()
         {
             float targetPixelX = TileX * TileSize;
             float targetPixelY = TileY * TileSize;
 
-            realX += (targetPixelX - realX) * 0.3f;
-            realY += (targetPixelY - realY) * 0.3f;
+            realX += (targetPixelX - realX) * Speed * 0.05f;
+            realY += (targetPixelY - realY) * Speed * 0.05f;
         }
+
         public void Draw(Graphics g)
         {
             g.DrawImage(sprite, realX, realY, TileSize, TileSize);
