@@ -1,5 +1,7 @@
 ﻿using System.IO;
 using System.Drawing;
+using System.Windows.Forms;
+
 
 namespace GraniteOfScience
 {
@@ -9,11 +11,21 @@ namespace GraniteOfScience
         public int LevelNumber { get; private set; }
         public Point TeacherStartPosition { get; private set; }
 
+        private string LevelsPath =
+            Path.Combine(Directory.GetParent(Application.StartupPath).Parent.Parent.FullName,
+            "GraniteOfScience", "Levels");
+
         public Level(int levelNumber = 1)
         {
-            int TeacherSpeedDelay = levelNumber == 1 ? 15 : 8;
+            LevelNumber = levelNumber;
 
-            string mapText = File.ReadAllText($"level{levelNumber}.txt");
+            string filePath = Path.Combine(LevelsPath, $"level{levelNumber}.txt");
+
+            if (!File.Exists(filePath))
+                throw new FileNotFoundException("Файл уровня не найден!", filePath);
+
+            string mapText = File.ReadAllText(filePath);
+
             Terrain = new Terrain(mapText);
         }
     }

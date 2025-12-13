@@ -14,9 +14,23 @@ namespace GraniteOfScience
         private Button[,] grid;
         private int currentLevel = 1;//текущий уровень 
 
+        private string LevelsPath;
+
+
         public MapEditorForm()
         {
             InitializeComponent();
+
+            string folder = Application.StartupPath;
+
+            // Ищем папку GraniteOfScience вверх по дереву
+            while (Path.GetFileName(folder) != "GraniteOfScience")
+                folder = Directory.GetParent(folder).FullName;
+
+            LevelsPath = Path.Combine(folder, "Levels");
+
+            comboCellType.SelectedIndex = 1;
+            CreateGrid();
 
             // по умолчанию будем ставить землю
             comboCellType.SelectedIndex = 1; // "Земля"
@@ -147,6 +161,9 @@ namespace GraniteOfScience
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
+            // Создаём папку Levels, если она ещё не существует
+            Directory.CreateDirectory(LevelsPath);
+
             string result = "";
 
             for (int y = 0; y < GridHeight; y++)
@@ -164,22 +181,22 @@ namespace GraniteOfScience
             }
             string selectedLevel = levelNumber.Text;
 
-            if (selectedLevel == "Уровень 1")
-            {
-                File.WriteAllText("level1.txt", result);
-                MessageBox.Show("Карта сохранена в level1.txt");
-            }
-            else if (selectedLevel == "Уровень 2")
-            {
-                File.WriteAllText("level2.txt", result);
-                MessageBox.Show("Карта сохранена в level2.txt");
-            }
-            // Если уровень не выбран
+            // определяем какой уровень выбран
+            string fileName;
+
+            if (levelNumber.Text == "Уровень 1")
+                fileName = "level1.txt";
+            else if (levelNumber.Text == "Уровень 2")
+                fileName = "level2.txt";
             else
-            {
-                File.WriteAllText("level1.txt", result);
-                MessageBox.Show("Уровень не выбран. Карта сохранена в level1.txt");
-            }
+                fileName = "level1.txt";
+
+            string fullPath = Path.Combine(LevelsPath, fileName);
+
+            // записываем файл
+            File.WriteAllText(fullPath, result);
+
+            MessageBox.Show($"Карта сохранена в {fullPath}");
         }
 
         private void buttonSave_Click_1(object sender, EventArgs e)

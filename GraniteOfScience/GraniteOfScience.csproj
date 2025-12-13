@@ -68,7 +68,7 @@
     <Compile Include="MapEditorForm.Designer.cs">
       <DependentUpon>MapEditorForm.cs</DependentUpon>
     </Compile>
-	<Compile Include="Player.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="SpeedSettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +151,9 @@
     <None Include="Resources\Map.png" />
     <None Include="Resources\Play.png" />
     <None Include="Resources\Fon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Levels\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

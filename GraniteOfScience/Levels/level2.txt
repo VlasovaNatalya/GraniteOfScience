@@ -1,0 +1,10 @@
+DDD      C  D  TTTT
+     TTTTT   T D TT
+           R     TT
+ D    D          TT
+  TTDD  TTTTTD   TT
+  TT    TTT      TT
+  TT TTTTTT      TT
+  TT   D      T  T
+  TT P  X   D T
+TTTT  DDTTTTTT  DD
